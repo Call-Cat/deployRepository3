@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ todo.title }}{% endblock %}
+
+{% block content %}
+    <div class="todo-form-container">
+        <h1>{{ todo.title }}</h1>
+        <div class="label">
+            <label for="title" class="label-left">説明:</label>
+        </div>
+        <div class="description-box">
+            <pre>{{ todo.description }}</pre>
+        </div>
+        <div class="todo-button-container">
+            <form method="GET" action="{% url 'edit_todo' todo_id=todo.id %}">
+                <button type="submit" class="common-button">編集</button>
+            </form>
+            <form id="deleteForm" action="{% url 'delete_todo' todo_id=todo.id %}" method="post">
+                {% csrf_token %}
+                <button type="button" onclick="confirmDelete()" class="common-button">削除</button>
+            </form>
+            <form method="GET" action="{% url 'index' %}">
+                <button type="submit" class="common-button">戻る</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function confirmDelete() {
+            if (confirm("本当に削除しますか？")) {
+                document.getElementById("deleteForm").submit();
+            }
+        }
+    </script>
+{% endblock %}

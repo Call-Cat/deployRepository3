@@ -1,0 +1,23 @@
+{% load django_bootstrap5 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    
+    {% bootstrap_css %}
+   
+    <!-- CSSファイルの読み込みをブートストラップの後に配置 -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    
+    {% bootstrap_javascript %}
+</head>
+    
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

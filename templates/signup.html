@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>ユーザー登録</h1>
+<form id="registrationForm" method="post" novalidate>
+    {% csrf_token %}
+    <label for="username">　ユーザー名:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password1">　パスワード:</label>
+    <input type="password" id="password1" name="password1" required>
+    <br>
+    <label for="password2">再パスワード:</label>
+    <input type="password" id="password2" name="password2" required>
+    <br>
+    <div class="button-container">
+        <button type="submit">登録</button>
+    </div>
+</form>
+
+{% if form.errors %}
+    <div id="error-container">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- 戻るボタン -->
+<form action="{% url 'login' %}">
+    <button type="submit">戻る</button>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById('registrationForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // フォームのデフォルトの送信をキャンセル
+
+            // エラーメッセージをリセット
+            var errorContainer = document.getElementById('error-container');
+            if (errorContainer) {
+                errorContainer.innerHTML = '';
+            }
+
+            // バリデーションチェック
+            var username = document.getElementById('username').value.trim();
+            var password1 = document.getElementById('password1').value.trim();
+            var password2 = document.getElementById('password2').value.trim();
+
+            var isValid = true;
+            if (!username) {
+                displayError('ユーザー名を入力してください。');
+                isValid = false;
+            }
+            if (!password1) {
+                displayError('パスワードを入力してください。');
+                isValid = false;
+            }
+            if (!password2) {
+                displayError('再パスワードを入力してください。');
+                isValid = false;
+            }
+            if (password1 !== password2) {
+                displayError('パスワードが一致しません。');
+                isValid = false;
+            }
+
+            // エラーがない場合はフォームを送信
+            if (isValid) {
+                form.submit();
+            }
+        });
+
+        // エラーメッセージを表示する関数
+        function displayError(message) {
+            var errorContainer = document.getElementById('error-container');
+            if (!errorContainer) {
+                errorContainer = document.createElement('div');
+                errorContainer.id = 'error-container';
+                form.insertBefore(errorContainer, form.firstChild);
+            }
+            var errorField = document.createElement('p');
+            errorField.className = 'error-message';
+            errorField.textContent = message;
+            errorContainer.appendChild(errorField);
+        }
+    });
+</script>
+{% endblock %}

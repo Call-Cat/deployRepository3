@@ -1,0 +1,218 @@
+/* styles.css */
+body .error-message {
+    color: red !important;
+    display: block; /* エラーメッセージを表示 */
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding-top: 20px;
+    text-align: left;
+}
+
+
+.button-container {
+    text-align: center;
+    margin-top: 10px;
+}
+button {
+    padding: 3px 7px;
+    font-size: 15px;
+}
+
+
+/* ヘッダー。indexのh1のcssをもってきている。他のh1設定にも反映されるかも。 */
+h1 {
+    text-align: center;
+}
+
+
+/* change_passwordに存在し他htmlになかったものを追加 */
+form {
+    width: 400px; /* フォームの幅を指定 */
+    text-align: center; /* フォーム内の要素を中央揃え */    
+}
+
+form p {
+    margin: 10px 0; /* フォーム項目の上下のマージンを設定 */
+    display: flex;
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: flex-end; /* 右寄せ */
+}
+
+label {
+    width: 200px; /* ラベルの幅を指定 */
+    text-align: right; /* ラベルを右寄せ */
+    margin-right: 10px; /* ラベルと入力フィールドの間隔を設定 */
+}
+/* 左寄せにしたいラベルはこれをhtmlで利用。 */
+.label-left {
+    text-align: left;
+}
+
+
+input[type="text"],
+input[type="password"] {
+    flex: 1; /* 入力フィールドが残りのスペースを占有 */
+}
+
+
+button, button.common-button {
+    margin: 10px auto; /* 上下のマージンを設定し、左右の余白を自動的に生成して中央に配置 */
+    display: block; /* インライン要素をブロック要素に変換する */
+    min-width: 50px; /* 左右の最小幅を設定 */
+    width: auto; /* 固定幅 */
+}
+
+/* new_todo_formに特化したスタイル */
+.new-todo-form {
+    width: 450px; /* フォームの幅を指定 */
+    text-align: left; /* 左寄せ */
+}
+
+.new-todo-form p {
+    margin: 10px 0; /* フォーム項目の上下のマージンを設定 */
+    display: block; /* フレックスを解除してブロック要素に */
+}
+
+.new-todo-form label {
+    display: block; /* ラベルをブロック要素に */
+    text-align: left; /* 左寄せ */
+    margin-bottom: 5px; /* ラベルの下にマージンを追加 */
+}
+
+.new-todo-form input[type="text"],
+.new-todo-form textarea {
+    width: calc(100% - 10px); /* フォーム全体の幅から余白を引いた幅 */
+    padding: 5px; /* パディングを追加 */
+    margin-top: 5px; /* 上部のマージンを追加 */
+}
+
+
+/* description-boxにスタイルを追加(todo.htmlのため) */
+.description-box {
+    border: 1px solid black; /* 枠線を追加 */
+    padding: 10px;
+    overflow: auto;
+    text-align: left;
+    max-width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 枠線を強調 */
+}
+
+.description-box pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+
+/* todo.htmlのボタンを横並びにする */
+.todo-form-container {
+    max-width: 600px; /* フォームコンテナの最大幅を指定 */
+    margin: 0 auto; /* コンテナを中央に配置 */
+    padding: 20px; /* 内側の余白を追加 */
+}
+.todo-button-container {
+    display: flex; /* ボタンを横並びにする */
+    justify-content: center; /* ボタンを中央に配置 */
+    gap: 0; /* ボタン間の間隔をゼロにする */
+    margin-top: 10px; /* 上部のマージン */
+}
+.todo-button-container form {
+    margin: 0; /* 各フォームのマージンをゼロにする */
+}
+.todo-button-container button {
+    padding: 3px 7px; /* ボタンの内側のパディング */
+    font-size: 15px; /* フォントサイズ */
+}
+
+
+/* index.htmlで利用しているstyle */
+/* ヘッダーのボタンを横並びにする。 */
+header {
+    display: flex; /* フレックスボックスレイアウトを適用 */
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: flex-start; /* 左寄せ */
+    gap: 10px; /* フォーム間の間隔を設定 */
+    flex-wrap: nowrap; /* 要素が折り返さないように設定 */
+}
+
+header form {
+    margin: 0; /* 各フォームのマージンをゼロにする */
+    width: auto; /* フォームの幅を自動に設定 */
+    display: inline-block; /* フォームが横に並ぶようにする */
+}
+
+
+/* 検索用のスタイル */
+.search-form-container {
+    display: flex; /* フレックスボックスレイアウトを適用 */
+    justify-content: center; /* コンテナを中央に配置 */
+    margin-bottom: 20px; /* 下部のマージンを追加 */
+}
+
+.search-form-container form {
+    display: flex; /* フォーム内の要素をフレックスボックスで配置 */
+}
+
+.search-form-container input[type="text"] {
+    padding: 5px 10px; /* パディングを調整 */
+    font-size: 15px; /* フォントサイズを設定 */
+    border: 1px solid #ccc; /* 枠線を設定 */
+    width: 50px; /* 幅を設定 */
+    margin-right: 10px; /* 検索窓とボタンの間にスペースを追加 */
+}
+
+button.search-button {
+    padding: 5px 10px; /* パディングを調整 */
+    font-size: 15px; /* 文字サイズを設定 */
+    background-color: #4CAF50; /* 背景色を緑色に */
+    color: white; /* 文字色を白色に */
+    border: none; /* 枠線をなしに */
+    border-radius: 0 4px 4px 0; /* 右側の角を丸くする */
+    cursor: pointer; /* カーソルをポインタに */
+}
+
+button.search-button:hover {
+    background-color: #45a049; /* ホバー時の背景色 */
+}
+
+
+/* 並び替えフォームを横並びにする */
+.sort-form-container {
+    display: flex; /* フレックスボックスレイアウトを適用 */
+    align-items: center; /* 垂直方向の中央揃え */
+    gap: 10px; /* 要素間の間隔を設定 */
+}
+
+.sort-form-container form {
+    margin: 0; /* 左右に余白を設定 */
+    padding: 0; /* フォームの内側の余白を取り除く */
+    width: auto; /* フォームの幅を自動に設定 */
+    display: inline-block; /* フォームが横に並ぶようにする */
+}
+
+/* select要素のスタイルを調整 */
+.sort-form-container select {
+    padding: 5px 10px; /* 内部余白を調整 */
+    font-size: 15px; /* フォントサイズ */
+    border: 1px solid #ccc; /* 枠線 */
+    border-radius: 4px; /* 角を丸くする */
+    min-width: 150px; /* 最小幅を指定 */
+    margin-right: 5px;
+}
+
+/* 昇順・降順ボタンのスタイル */
+.sort-form-container button.sort-button {
+    padding: 5px 8px; /* 内部余白を調整 */
+    font-size: 15px; /* フォントサイズ */
+    border: 1px solid #ccc; /* 枠線 */
+    border-radius: 4px; /* 角を丸くする */
+    min-width: 70px; /* 最小幅を指定 */
+    margin: 0; /* ボタン間の余白をなくす */
+}
+

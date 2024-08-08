@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>ログイン</h1>
+    <form id="registrationForm" method="post" novalidate>
+        {% csrf_token %}
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <div class="button-container">
+            <button type="submit">ログイン</button>
+        </div>
+    </form>
+
+    {% if form.errors %}
+        <div id="error-container">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <p class="error-message">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <p>↓アカウントを持っていない方はこちら↓</p>
+    <div class="button-container">
+        <button id="signupButton">ユーザー登録</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var signupButton = document.getElementById('signupButton');
+            signupButton.addEventListener('click', function() {
+                window.location.href = "{% url 'signup' %}";
+            });
+        });
+
+        var form = document.getElementById('registrationForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var errorContainer = document.getElementById('error-container');
+            if (errorContainer) {
+                errorContainer.innerHTML = '';
+            }
+
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+            var isValid = true;
+            if (!username) {
+                displayError('ユーザー名を入力してください。');
+                isValid = false;
+            }
+            if (!password) {
+                displayError('パスワードを入力してください。');
+                isValid = false;
+            }
+            if (isValid) {
+                form.submit();
+            }
+        });
+
+        function displayError(message) {
+            var errorContainer = document.getElementById('error-container');
+            if (!errorContainer) {
+                errorContainer = document.createElement('div');
+                errorContainer.id = 'error-container';
+                form.insertBefore(errorContainer, form.firstChild);
+            }
+            var errorField = document.createElement('p');
+            errorField.className = 'error-message';
+            errorField.textContent = message;
+            errorContainer.appendChild(errorField);
+        }
+    </script>
+{% endblock %}

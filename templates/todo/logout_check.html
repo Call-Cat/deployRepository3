@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>ログアウトをしますか？</h1>
+<p>本当にログアウトしますか？</p>
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button class="logout-btn btn btn-danger" type="submit">ログアウト</button>
+</form>
+<button class="cancel-btn btn btn-secondary" type="button" onclick="cancel()">キャンセル</button>
+
+<!-- JavaScript関数の定義 -->
+<script>
+    function cancel() {
+        window.location.href = "{% url 'index' %}";
+    }
+</script>
+{% endblock %}

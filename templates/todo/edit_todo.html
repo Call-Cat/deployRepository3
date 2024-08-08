@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'edit_todo' todo_id=todo.id %}" method="post" class="form-container">
+    {% csrf_token %}
+    <h1>Todoを編集します。</h1>
+    
+    <div class="new-todo-form">
+        <label for="{{ form.title.id_for_label }}">タイトル：</label>
+        {{ form.title }}
+        {% for error in form.title.errors %}
+            <div class="error-message">{{ error }}</div>
+        {% endfor %}
+    </div>
+    
+    <div class="new-todo-form">
+        <label for="{{ form.description.id_for_label }}">説明：</label>
+        {{ form.description }}
+        {% for error in form.description.errors %}
+            <div class="error-message">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="button-container">
+        <button type="submit" class="common-button">編集を保存する</button>
+    </div>
+</form>
+
+<form action="{% url 'todo' todo_id=todo.id %}" method="get" class="form-container">
+    <div class="button-container">
+        <button type="submit" class="common-button">戻る</button>
+    </div>
+</form>
+{% endblock %}

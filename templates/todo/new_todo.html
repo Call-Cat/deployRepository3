@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h1>新しいTodoを作成</h1>
+    <form action="{% url 'new_todo' %}" method="post" class="new-todo-form">
+        {% csrf_token %}
+        
+        <p>
+            <label for="title">タイトル:</label>
+            <input type="text" id="title" name="title" value="{{ form.title.value|default:'' }}">
+            {% for error in form.title.errors %}
+                <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+        
+        <p>
+            <label for="description">説明:</label>
+            <textarea id="description" name="description" rows="10" cols="50">{{ form.description.value|default:'' }}</textarea>
+            {% for error in form.description.errors %}
+                <span class="error-message">{{ error }}</span>
+            {% endfor %}
+        </p>
+
+        <div class="button-container">
+            <button type="submit" class="submit-button">作成</button>
+        </div>
+    </form>
+    <form action="{% url 'index' %}" method="get" class="new-todo-form">
+        <button type="submit" class="common-button">戻る</button>
+    </form>
+</div>
+{% endblock %}

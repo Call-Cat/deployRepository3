@@ -1,0 +1,16 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <h1>マイページ</h1>
+    
+    <!-- パスワード変更ボタン -->
+    <form method="GET" action="{% url 'change_password' %}">
+        <button type="submit" class="common-button">パスワードの変更</button>
+    </form> 
+    
+    <!-- index.htmlに戻るボタン -->       
+    <form action="{% url 'index' %}">
+        <button type="submit" class="common-button">戻る</button>
+    </form>    
+    <br>
+{% endblock %}
